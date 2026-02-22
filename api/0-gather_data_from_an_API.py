@@ -6,8 +6,8 @@ Fetches and displays the TODO list progress of a given employee
 using the JSONPlaceholder REST API.
 """
 
-import sys
 import requests
+import sys
 
 
 if __name__ == "__main__":
@@ -27,9 +27,6 @@ if __name__ == "__main__":
 
     user_response = requests.get(user_url)
     todos_response = requests.get(todos_url)
-
-    if user_response.status_code != 200 or todos_response.status_code != 200:
-        sys.exit(1)
 
     user = user_response.json()
     todos = todos_response.json()
