@@ -6,8 +6,8 @@ Fetches and displays the TODO list progress of a given employee
 using the JSONPlaceholder REST API.
 """
 
-import requests
 import sys
+import requests
 
 
 if __name__ == "__main__":
@@ -16,13 +16,11 @@ if __name__ == "__main__":
 
     employee_id = sys.argv[1]
 
-    user_url = (
-        "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+    user_url = "https://jsonplaceholder.typicode.com/users/{}".format(
+        employee_id
     )
-    todos_url = (
-        "https://jsonplaceholder.typicode.com/todos?userId={}".format(
-            employee_id
-        )
+    todos_url = "https://jsonplaceholder.typicode.com/todos?userId={}".format(
+        employee_id
     )
 
     user_response = requests.get(user_url)
@@ -34,14 +32,10 @@ if __name__ == "__main__":
     user = user_response.json()
     todos = todos_response.json()
 
-    employee_name = user.get("name")
+    employee_name = user["name"]
+
     total_tasks = len(todos)
-
-    done_tasks = []
-    for task in todos:
-        if task.get("completed") is True:
-            done_tasks.append(task)
-
+    done_tasks = [task for task in todos if task["completed"] is True]
     number_of_done_tasks = len(done_tasks)
 
     print(
@@ -53,4 +47,4 @@ if __name__ == "__main__":
     )
 
     for task in done_tasks:
-        print("\t {}".format(task.get("title")))
+        print("\t {}".format(task["title"]))
